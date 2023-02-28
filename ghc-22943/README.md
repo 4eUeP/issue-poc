@@ -5,7 +5,7 @@
 - ghc: 9.2.7
 - cabal: 3.8.1.0
 
-## Run
+## Test1
 
 ```
 $ cabal run t1
