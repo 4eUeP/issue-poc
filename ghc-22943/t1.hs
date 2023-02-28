@@ -7,8 +7,9 @@ import qualified Data.ByteString          as BS
 
 main :: IO ()
 main =
-  Async.withAsync f1 $ \a -> Async.wait a
-  --f2
+  -- Async.withAsync f1 $ \a -> Async.wait a
+  -- f2
+  f3
 
 f1 :: IO ()
 f1 = forever $ do
@@ -18,3 +19,10 @@ f1 = forever $ do
 f2 :: IO ()
 f2 = forever $ do
   print $ BS.replicate 102400 65
+
+f3 :: IO ()
+f3 =
+  Async.withAsync f1 $ \a -> do
+    a1 <- Async.async f1
+    Async.link2Only (const True) a a1
+    Async.wait a
